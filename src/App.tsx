@@ -1,24 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 
 function App() {
+  const [windowObject, setWindowObject] = useState<string[]>([])
+  useEffect(() => {
+    // get the window:
+    // setWindowObject(JSON.stringify(window))
+    console.log(Object.getOwnPropertyNames(window))
+    const windowProps = Object.getOwnPropertyNames(window).sort()
+    setWindowObject(windowProps)
+  },[])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Hello Defiant Wallet ;-)</h1>
+
+      <h2>Window props:</h2>
+      <ul>
+        {windowObject.map((name: string) => (
+          <li key={name}>{name}</li>
+        ))}
+      </ul>
     </div>
   );
 }
